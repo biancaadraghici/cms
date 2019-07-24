@@ -11,6 +11,8 @@
                     <p class="alert alert-success">{{session('user_deleted')}}</p>
                 @elseif(Session::has('user_edited'))
                     <p class="alert alert-success">{{session('user_edited')}}</p>
+                @elseif(Session::has('user_created'))
+                    <p class="alert alert-success">{{session('user_created')}}</p>
                 @endif
                 @if((count($users))>0)
                     <table class="table table-hover"  >
