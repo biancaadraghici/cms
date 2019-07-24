@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UsersCreateRequest;
+use App\Http\Requests\UsersEditRequest;
 use Illuminate\Support\Facades\Session;
 use App\User;
 use App\Role;
@@ -27,7 +29,8 @@ class AdminUsersController extends Controller
      */
     public function create()
     {
-        return view('admin/users/create');
+        $roles=Role::pluck('role_name','id')->all();
+        return view('admin/users/create',compact('roles'));
     }
 
     /**
@@ -36,9 +39,13 @@ class AdminUsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UsersCreateRequest $request)
     {
-        //
+        $input=$request->all();
+        User::create($input);
+        Session::flash('user_created','The user has been created!');
+        return redirect('admin/users');
+
     }
 
     /**
@@ -72,9 +79,13 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UsersEditRequest $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $input = $request->all();
+        $user -> update($input);
+        Session::flash('user_edited', 'The user has been edited!');
+        return redirect('admin/users');
     }
 
     /**

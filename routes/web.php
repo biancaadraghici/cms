@@ -41,8 +41,8 @@ Route::group(['prefix'=> 'admin'], function(){
         Route::get('edit/{id}', ['as'=>'admin-user-edit', 'uses' => 'AdminUsersController@edit']);
         Route::patch('{id}', ['as' => 'admin-user-update', 'uses'=>'AdminUsersController@update']);
         //delete
-        Route::get('delete/{id}', ['as' => 'delete-user', 'uses' =>'AdminUsersController@destroy']);
-        //Route::get('{$id}', ['as'=>'admin-user-delete', 'uses'=>'AdminUsersController@destroy']);
+        Route::get('delete/{id}', ['as' => 'admin-user-delete', 'uses' =>'AdminUsersController@destroy']);
+       
     });
     
 
