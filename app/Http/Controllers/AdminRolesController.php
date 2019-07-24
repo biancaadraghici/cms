@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
-use App\User;
-use App\Role;
 
-class AdminUsersController extends Controller
+class AdminRolesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +13,7 @@ class AdminUsersController extends Controller
      */
     public function index()
     {
-        $users=User::paginate(15);
-        return view('admin/users/index', compact('users'));
+        //
     }
 
     /**
@@ -27,7 +23,7 @@ class AdminUsersController extends Controller
      */
     public function create()
     {
-        return view('admin/users/create');
+        //
     }
 
     /**
@@ -60,9 +56,7 @@ class AdminUsersController extends Controller
      */
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-        $roles=Role::pluck('role_name', 'id')->all();
-        return view('admin/users/edit',compact('user','roles'));
+        //
     }
 
     /**
@@ -85,9 +79,6 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-        $user=User::findOrFail($id)->delete();
-
-        Session::flash('user_deleted','The user has been deleted!');
-        return redirect('admin/users');
+        //
     }
 }

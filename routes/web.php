@@ -25,4 +25,25 @@ Route::get('/admin',function(){
 
 Route::resource('admin/users','AdminUsersController');
 
-Route::delete('admin/users/delete','AdminUsersController@destroy');
+
+
+
+
+Route::group(['prefix'=> 'admin'], function(){
+
+    
+
+    Route::group(['prefix' => 'users'], function(){
+        //create&save
+        Route::get('create',['as'=>'admin-user-create', 'uses'=> 'AdminUsersController@create']);
+        Route::post('create', ['as'=>'admin-user-save','uses'=>'AdminUsersController@store']);
+        //edit&update
+        Route::get('edit/{id}', ['as'=>'admin-user-edit', 'uses' => 'AdminUsersController@edit']);
+        Route::patch('{id}', ['as' => 'admin-user-update', 'uses'=>'AdminUsersController@update']);
+        //delete
+        Route::get('delete/{id}', ['as' => 'delete-user', 'uses' =>'AdminUsersController@destroy']);
+        //Route::get('{$id}', ['as'=>'admin-user-delete', 'uses'=>'AdminUsersController@destroy']);
+    });
+    
+
+});
