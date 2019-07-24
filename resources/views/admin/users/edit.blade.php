@@ -27,6 +27,9 @@
         <div>
             {!! Form::submit('Save',['class'=>'btn btn-success']) !!}
         </div>
-    {!! Form::close() !!}  
+    {!! Form::close() !!}
+
+        @include('includes/form_required_fields_error')
 </div>  
+
 @endsection
