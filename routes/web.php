@@ -22,13 +22,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin',function(){
     return view('admin/index');
 });
-
+/* Resource Routes */ 
 Route::resource('admin/users','AdminUsersController');
+Route::resource('admin/posts','AdminPostsController');
 
 
-
-
-
+/* Group Routes */
 Route::group(['prefix'=> 'admin'], function(){
 
     
@@ -43,6 +42,19 @@ Route::group(['prefix'=> 'admin'], function(){
         //delete
         Route::get('delete/{id}', ['as' => 'admin-user-delete', 'uses' =>'AdminUsersController@destroy']);
        
+    });
+
+    Route::group(['prefix'=>'posts'],function(){
+        //create
+        Route::get('create',['as'=>'admin-post-create','uses'=>'AdminPostsController@create']);
+        //store
+        Route::post('create',['as'=>'admin-post-save','uses'=>'AdminPostsController@store']);
+        //edit
+        Route::get('edit/{id}',['as'=>'admin-post-edit','uses'=>'AdminPostsController@edit']);
+        //update
+        Route::patch('{id}',['as'=>'admin-post-update','uses'=>'AdminPostsController@update']);
+        //delete
+        Route::get('delete/{id}',['as'=>'admin-post-delete','uses'=>'AdminPostsController@destroy']);
     });
     
 
