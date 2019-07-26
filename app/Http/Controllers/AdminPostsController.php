@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\User;
 use App\Role;
+use App\Photo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -37,12 +38,18 @@ class AdminPostsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
-     */
+     */ 
     public function store(Request $request)
     {
         $user=Auth::user();
         if(isset($user)){
             $input=$request->all();
+            if($file=$request->file('photo_id')){
+                $name=time() . $file->getClientOriginalName();
+                $file->move('images',$name);
+                $photo = Photo::create(['path'=>$name]);
+                $input['photo_id'] = $photo->id;
+            }
             $user->posts()->create($input);
             Session::flash('post_created','The post has been created');
             return redirect('admin/posts');
@@ -71,6 +78,8 @@ class AdminPostsController extends Controller
     public function edit($id)
     {
         $post=Post::findOrFail($id);
+        
+
         return view('admin/posts/edit',compact('post'));
     }
 
@@ -84,11 +93,21 @@ class AdminPostsController extends Controller
     public function update(Request $request, $id)
     {
         $user=Auth::user();
-        $post=Post::findOrFail($id);
-        $input=$request->all();
-        $post->update($input);
-        Session::flash('post_updated','The post has been updated');
-        return redirect('admin/posts');
+        if(isset($user)){
+            $post=Post::findOrFail($id);
+            $input=$request->all();
+            if($file=$request->file('photo_id')){
+                $name = time() . $file->getClientOriginalName();
+                $file->move('images', $name);
+                $photo=Photo::create(['path'=>$name]);
+                $input['photo_id'] = $photo->id;
+            }
+            
+            $post->update($input);
+            Session::flash('post_updated','The post has been updated');
+            return redirect('admin/posts');
+        }
+        // else{return view(ceva pagina cu eroare)}
     }
 
     /**
@@ -99,7 +118,9 @@ class AdminPostsController extends Controller
      */
     public function destroy($id)
     {
-        $post=Post::findOrFail($id)->delete();
+        $post=Post::findOrFail($id);
+        unlink(public_path()."/images/".$post->photo->path);
+        $post->delete();
         return redirect('admin/posts');
     }
 }

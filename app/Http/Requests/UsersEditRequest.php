@@ -24,9 +24,9 @@ class UsersEditRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name'=>'required',
-            'last_name'=>'required',
-            'email'=>'required',
+            'first_name' => 'required|string|min:3|max:100|regex:/^([^0-9]*)$/',
+            'last_name' => 'required|string|min:3|max:100|regex:/^([^0-9]*)$/',
+            'email' => 'required|string|email|max:100|unique:users',
             'role_id'=>'required',
             'is_active'=>'required',
         ];
