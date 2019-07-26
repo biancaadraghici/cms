@@ -19,6 +19,7 @@
                         <thead>
                             <tr>
                                     <th scope="col" style="text-align:center;">ID</th>
+                                    <th scope="col" style="text-align:center;">Avatar</th>
                                     <th scope="col" style="text-align:center;">Full Name</th>
                                     <th scope="col" style="text-align:center;">E-mail</th>
                                     <th scope="col" style="text-align:center;">Created</th>
@@ -30,6 +31,14 @@
                             @foreach($users as $user)
                             <tr>
                                     <td>{{$user->id}}</td>
+                                @if(($user->photo_id)!=null)
+                                    @php
+                                    $avatar=$user->photo->path;
+                                    @endphp
+                                    <td><img style="border-radius:50%;width:40px;height:40px;" class="img-fluid"  src="{{asset('images/'.$avatar)}}"></td>
+                                    @else 
+                                    <td>User has no avatar</td>
+                                @endif
                                     <td>{{$user->first_name.' '.$user->last_name}}</td>
                                     <td>{{$user->email}}</td>
                                 @if(!is_null($user->created_at))

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    {!! Form::open(['method'=>'PATCH','action'=>['AdminUsersController@update',$user->id]]) !!}
+    {!! Form::open(['method'=>'PATCH','action'=>['AdminUsersController@update',$user->id],'files'=>true]) !!}
 
         <div class="form-group">
             {!! Form::label('first_name','First Name') !!}
@@ -23,6 +23,10 @@
         <div class="form-group">
             {!! Form::label('is_active','Status') !!}
             {!! Form::select('is_active',array('0'=>'Inactive','1'=>'Active'),old('is_active',$user->is_active),['class'=>'form-control']) !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('photo_id','Photo') !!}
+            {!! Form::file('photo_id',null,['class'=>'form-control']) !!}
         </div>
         <div>
             {!! Form::submit('Save',['class'=>'btn btn-success']) !!}

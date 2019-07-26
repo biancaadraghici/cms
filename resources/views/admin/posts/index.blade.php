@@ -12,7 +12,7 @@
                             @php
                             $image=$post->photo->path ;
                             @endphp
-                            <div><img height="50" src="{{asset('images/'.$image)}}"></div>
+                            <div><img height="100" src="{{asset('images/'.$image)}}"></div>
                         @endif
                     <a href="{{route('admin-post-edit',$post->id)}}" class="btn btn-info">Edit</a>
                     <a href="{{route('admin-post-delete',$post->id)}}" class="btn btn-info">delete</a>

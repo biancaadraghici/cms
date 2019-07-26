@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    {!! Form::open(['method'=>'POST','action'=>'AdminUsersController@store']) !!}
+    {!! Form::open(['method'=>'POST','action'=>'AdminUsersController@store','files'=>true]) !!}
 
         <div class="form-group">
             {!! Form::label('first_name','First Name') !!}
@@ -27,6 +27,10 @@
         <div class="form-group">
             {!!Form::label('password','Password:')!!}
             {!!Form::password('password', ['class'=>'form-control'])!!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('photo_id','Photo') !!}
+            {!! Form::file('photo_id',null,['class'=>'form-control']) !!}
         </div>
         <div>
             {!! Form::submit('Save',['class'=>'btn btn-success']) !!}

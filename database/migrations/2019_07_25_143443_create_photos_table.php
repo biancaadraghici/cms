@@ -18,7 +18,6 @@ class CreatePhotosTable extends Migration
             $table->string('path');
             $table->timestamps();
 
-            $table->foreign('path')->references('id')->on('posts')->onDelete('cascade');
 
         });
     }
