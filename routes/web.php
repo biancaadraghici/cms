@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
+Route::get('/blog','HomeController@blog');
 
 /* Resource Routes */ 
 Route::resource('admin/users','AdminUsersController');
@@ -70,9 +70,10 @@ Route::get('/user',function(){
 });
 
 /* Group Routes */
-Route::group(['prefix'=>'user'],function(){
-    //edit
-    Route::get('edit/{id}',['as'=>'user-edit','uses'=>'UsersController@edit']);
-    //update
-    Route::patch('{id}',['as'=>'user-update','uses'=>'UsersController@update']);
-});
+// Route::group(['prefix'=>'user'],function(){
+//     //edit
+//     Route::get('edit/{id}',['as'=>'user-edit','uses'=>'UsersController@edit']);
+//     //update
+//     Route::patch('{id}',['as'=>'user-update','uses'=>'UsersController@update']);
+// });
+
