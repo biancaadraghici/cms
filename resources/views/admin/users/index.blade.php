@@ -37,7 +37,7 @@
                                     @endphp
                                     <td><img style="border-radius:50%;width:40px;height:40px;" class="img-fluid"  src="{{asset('images/'.$avatar)}}"></td>
                                     @else 
-                                    <td>User has no avatar</td>
+                                    <td><img style="border-radius:50%;width:40px;height:40px;" class="img-fluid" src="https://api.adorable.io/avatars/285/abott@adorable.png"></td>
                                 @endif
                                     <td>{{$user->first_name.' '.$user->last_name}}</td>
                                     <td>{{$user->email}}</td>

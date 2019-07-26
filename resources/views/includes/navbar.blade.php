@@ -31,7 +31,17 @@
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->first_name }} <span class="caret"></span>
+                            
+                            @if((Auth::user()->photo_id)!=null)
+                                @php
+                                $avatar=Auth::user()->photo->path;
+                                @endphp
+                                <td><img style="border-radius:50%;width:29px;height:29px;" class="img-fluid"  src="{{asset('images/'.$avatar)}}"></td>
+                                @else 
+                                <td><img style="border-radius:50%;width:29px;height:29px;" class="img-fluid" src="https://api.adorable.io/avatars/285/abott@adorable.png"></td>
+                            @endif
+                            {{ Auth::user()->first_name }} 
+                            <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
@@ -46,7 +56,7 @@
                                     {{ csrf_field() }}
                                 </form>
                             </li>
-                            <li><a href="">Administration</a></li>
+                        <li><a href="{{url('user')}}">Profile</a></li>
                         </ul>
                     </li>
                 @endif

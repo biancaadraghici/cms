@@ -19,14 +19,18 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/admin',function(){
-    return view('admin/index');
-});
+
 /* Resource Routes */ 
 Route::resource('admin/users','AdminUsersController');
 Route::resource('admin/posts','AdminPostsController');
+Route::resource('user','UsersController');
 
+/* Group Routes */
 
+#admin
+Route::get('/admin',function(){
+    return view('admin/index');
+});
 /* Group Routes */
 Route::group(['prefix'=> 'admin'], function(){
 
@@ -58,4 +62,17 @@ Route::group(['prefix'=> 'admin'], function(){
     });
     
 
+});
+
+#users
+Route::get('/user',function(){
+    return view('user/index');
+});
+
+/* Group Routes */
+Route::group(['prefix'=>'user'],function(){
+    //edit
+    Route::get('edit/{id}',['as'=>'user-edit','uses'=>'UsersController@edit']);
+    //update
+    Route::patch('{id}',['as'=>'user-update','uses'=>'UsersController@update']);
 });
