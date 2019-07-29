@@ -4,7 +4,7 @@
     <div class="container">
         <h1 class="text-center display-1">My Posts</h1>
         <hr style="width:40%;">
-        @if(count($posts)>0)
+        @if((count($posts))>0)
             @foreach($posts as $post)
                 <div>
                     {{$post->title}}

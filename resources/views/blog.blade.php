@@ -14,9 +14,11 @@
 							<span style="text-align:right;">{{ $post->created_at }}</span>
 						
 						</div>
+						@if(($post->photo_id)!=null)
 						<div>
 							<img style="width:50%" src="{{ asset('images/' . $post->photo->path) }}" />
 						</div>
+						@endif
 						<div>
 							<b>
 								{{ $post->title }}
