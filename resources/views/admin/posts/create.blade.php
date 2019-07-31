@@ -18,5 +18,6 @@
                 {!! Form::submit('Create Post',['class'=>'btn btn-info']) !!}
             </div>
         {!! Form::close()!!}
+        @include('includes/form_required_fields_error') 
     </div>
 @endsection

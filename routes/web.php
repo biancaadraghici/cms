@@ -24,6 +24,7 @@ Route::get('/blog','HomeController@blog');
 Route::resource('admin/users','AdminUsersController');
 Route::resource('admin/posts','AdminPostsController');
 Route::resource('user','UsersController');
+Route::resource('admin/members','AdminMembersController');
 
 /* Group Routes */
 
@@ -61,6 +62,19 @@ Route::group(['prefix'=> 'admin'], function(){
         Route::get('delete/{id}',['as'=>'admin-post-delete','uses'=>'AdminPostsController@destroy']);
     });
     
+    Route::group(['prefix'=>'members'],function(){
+        //create
+        Route::get('create',['as'=>'admin-member-create','uses'=>'AdminMembersController@create']);
+        //store
+        Route::post('create',['as'=>'admin-member-save','uses'=>'AdminMembersController@store']);
+        //edit
+        Route::get('edit/{id}',['as'=>'admin-member-edit','uses'=>'AdminMembersController@edit']);
+        //update
+        Route::get('{id}',['as'=>'admin-member-update','uses'=>'AdminMembersController@update']);
+        //delete
+        Route::get('delete/{id}',['as'=>'admin-member-delete','uses'=>'AdminMembersController@destroy']);
+    });
+
 
 });
 
